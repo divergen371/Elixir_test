@@ -39,13 +39,7 @@
   </article>
 </section>
 <%
-datas = [
-  %{"name" => "enぺだーし", "age" => 54, "team" => "有限会社デライトシステムズ", "position" => "代表取締役、性能探求者" }, 
-  %{"name" => "ざっきー", "age" => 50, "team" => "公立大学法人 北九州市立大学", "position" => "准教授、カーネルハッカー" }, 
-  %{"name" => "たくと", "age" => 40, "team" => "カラビナテクノロジー株式会社", "position" => "リードエンジニア" }, 
-  %{"name" => "piacere", "age" => 48, "team" => "株式会社DigiDockConsulting", "position" => "常務取締役CTO、技術顧問、重力プログラマ" }
-] 
-|> Enum.filter(& &1["age"] >= 48)
+datas = Util.Db.query("select * from members") |> Util.Db.columns_rows
 
 %>
 <table>
