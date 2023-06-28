@@ -41,8 +41,7 @@
 <%
 result = Util.Db.query("select * from members")
 datas = result |>Util.Db.columns_rows() |> Enum.map(fn n -> %{"name" => n["name"], "age" => n["age"]}end) 
-columns = result |> Util.Db.columns() |> Enum.filter(fn n -> n == "name" || n == "age" end)
-
+columns = ["name", "age"]
 %>
 <table>
   <tr>
