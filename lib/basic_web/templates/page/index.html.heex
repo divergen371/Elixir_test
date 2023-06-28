@@ -45,7 +45,7 @@ datas = [
   %{"name" => "たくと", "age" => 40, "team" => "カラビナテクノロジー株式会社", "position" => "リードエンジニア" }, 
   %{"name" => "piacere", "age" => 48, "team" => "株式会社DigiDockConsulting", "position" => "常務取締役CTO、技術顧問、重力プログラマ" }
 ] 
-|> Enum.sort(fn current, next -> current["age"] < next["age"] end)
+|> Enum.filter(& &1["age"] >= 48)
 
 %>
 <table>
