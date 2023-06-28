@@ -1,0 +1,60 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
+  <p>Peace of mind from prototype to production</p>
+</section>
+<section class="row">
+  <article class="column">
+    <h2>Resources</h2>
+    <ul>
+      <li>
+        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
+      </li>
+      <li>
+        <a href="https://github.com/phoenixframework/phoenix">Source</a>
+      </li>
+      <li>
+        <a href="https://github.com/phoenixframework/phoenix/blob/v1.6/CHANGELOG.md">v1.6 Changelog</a>
+      </li>
+    </ul>
+  </article>
+  <article class="column">
+    <h2>Help</h2>
+    <ul>
+      <li>
+        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
+      </li>
+      <li>
+        <a href="https://web.libera.chat/#elixir">#elixir on Libera Chat (IRC)</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
+      </li>
+      <li>
+        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
+      </li>
+      <li>
+        <a href="https://discord.gg/elixir">Elixir on Discord</a>
+      </li>
+    </ul>
+  </article>
+</section>
+<%
+datas = [
+  %{"name" => "enぺだーし", "age" => 54, "team" => "有限会社デライトシステムズ", "position" => "代表取締役、性能探求者" }, 
+  %{"name" => "ざっきー", "age" => 50, "team" => "公立大学法人 北九州市立大学", "position" => "准教授、カーネルハッカー" }, 
+  %{"name" => "たくと", "age" => 40, "team" => "カラビナテクノロジー株式会社", "position" => "リードエンジニア" }, 
+  %{"name" => "piacere", "age" => 48, "team" => "株式会社DigiDockConsulting", "position" => "常務取締役CTO、技術顧問、重力プログラマ" }
+] 
+|> Enum.sort(fn current, next -> current["age"] < next["age"] end)
+
+%>
+<table>
+  <%= for n <- datas do %>
+    <tr>
+      <td><%= n["name"] %></td>
+      <td><%= n["age"] %></td>
+      <td><%= n["team"] %></td>
+      <td><%= n["position"] %></td>
+    </tr>
+  <% end %>
+</table>
