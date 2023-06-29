@@ -19,10 +19,13 @@
     </tr>
     <tr v-for="n in members">
       <td>{{n.id}}</td>
-      <td>{{n.name}}</td>
-      <td>{{n.age}}</td>
-      <td>{{n.team}}</td>
-      <td>{{n.position}}</td>
+      <td><input type="text" v-model="n.name"></td>
+      <td><input type="text" v-model="n.age"></td>
+      <td><input type="text" v-model="n.team"></td>
+      <td><input type="text" v-model="n.position"></td>
+    </tr>
+    <tr>
+      <td colspan="6"><button @click="onUpdate">全件更新</button></td>
     </tr>
     <tr>
       <td>-</td>
@@ -62,6 +65,17 @@
       })
       this.add = {name: '', age: '', team: '', position: ''}
       axios.get('/members').then(res => {this.members = res.data})
+    },
+    onUpdate: async function(e) {
+      for(const n of this.members) {
+        await axios.put('/members/' + n.id, {
+          'name': n.name,
+          'age': n.age,
+          'team': n.team,
+          'position': n.position
+        })
+      }
+      axios.get('/members').then((res => {this.members = res.data}))
     },
   },
   }).mount("#app")
