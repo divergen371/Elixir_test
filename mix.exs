@@ -48,7 +48,8 @@ defmodule Basic.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.3", only: [:dev], runtime: false},
-      {:req, "~> 0.3"}
+      {:req, "~> 0.3"},
+      {:sqlex, "~> 0.1.0"}
     ]
   end
 
