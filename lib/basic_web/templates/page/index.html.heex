@@ -23,6 +23,7 @@
       <td><input type="text" v-model="n.age"></td>
       <td><input type="text" v-model="n.team"></td>
       <td><input type="text" v-model="n.position"></td>
+      <td><button @click="onDelete(n.id)">削除</button></td>
     </tr>
     <tr>
       <td colspan="6"><button @click="onUpdate">全件更新</button></td>
@@ -76,6 +77,10 @@
         })
       }
       axios.get('/members').then((res => {this.members = res.data}))
+    },
+    onDelete: async function(id) {
+      await axios.delete('/members/' + id)
+    axios.get('/members').then(res => {this.members = res.data})
     },
   },
   }).mount("#app")
