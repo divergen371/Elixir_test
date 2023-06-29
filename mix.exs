@@ -49,7 +49,7 @@ defmodule Basic.MixProject do
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.3", only: [:dev], runtime: false},
       {:req, "~> 0.3"},
-      {:sqlex, "~> 0.1.0"}
+      {:sqlex, "~> 0.1.0"},
     ]
   end
 

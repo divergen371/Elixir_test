@@ -17,7 +17,13 @@ defmodule BasicWeb.Router do
   scope "/", BasicWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", IndexLive
+  end
+
+  scope "/members", BasicWeb do
+    pipe_through :api
+
+    resources "/", MemberController
   end
 
   # Other scopes may use custom stacks.

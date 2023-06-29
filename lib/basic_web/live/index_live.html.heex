@@ -1,0 +1,19 @@
+<h1>Members</h1>
+<table>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>age</th>
+    <th>team</th>
+    <th>position</th>
+  </tr>
+  <%= for n <- @members do %>
+    <tr>
+      <td><%= n.id %></td>
+      <td><%= n.name %></td>
+      <td><%= n.age %></td>
+      <td><%= n.team %></td>
+      <td><%= n.position %></td>
+    </tr>
+  <% end %>
+</table>
