@@ -13,6 +13,7 @@ columns = ["id", "title", "created_at", "likes_count"]
       datasets: [{
         label: 'Qiitaいいね数',
         data: [<%=for n <- datas do%>'<%= n["likes_count"] %>' ,<% end %>],
+        backgroundColor: [<%= for n <- datas do %>'rgba(<%= Enum.random(150..230) %>, <%= Enum.random(80..170) %>,<%= Enum.random(190..255) %>, 0.6)',<% end %>]
       }]
     },
     options: {
