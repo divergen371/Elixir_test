@@ -11,6 +11,15 @@ defmodule BasicWeb.IndexLive do
   end
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, members: get())}
+    {:ok,
+     assign(socket,
+       members: get(),
+       add: %{name: "", age: "", team: "", position: ""}
+     )}
+  end
+
+  def handle_event("onCreate", params, socket) do
+    Req.post!(@url, headers: @headers, body: Jason.encode!(params))
+    {:noreply, assign(socket, members: get())}
   end
 end

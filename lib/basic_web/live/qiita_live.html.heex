@@ -1,0 +1,25 @@
+<%
+columns = ["id", "title", "created_at"]
+%>
+<p>
+  <%= if @message do %><%= @message %><% end %>
+</p>
+<form phx-change="onChange" phx-submit="onSearch">
+  <input type="text" name="query" value={@query} placeholder="Please input keyword" />
+  Query: <%= @query %><br>
+  <input type="submit" value="検索">
+</form>
+<table>
+  <tr>
+    <%= for column <- columns do %>
+      <th><%= column %></th>
+    <% end %>
+  </tr>
+  <%= for n <- @datas do %>
+    <tr>
+      <%= for column <- columns do %>
+        <td><%= n[column] %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

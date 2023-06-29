@@ -17,3 +17,15 @@
     </tr>
   <% end %>
 </table>
+<form phx-submit="onCreate">
+  <table>
+    <tr>
+      <td>－</td>
+      <td><input type="text" name="name" value={@add.name}></td>
+      <td><input type="text" name="age" value={@add.age}></td>
+      <td><input type="text" name="team" value={@add.team}></td>
+      <td><input type="text" name="position" value={@add.position}></td>
+      <td><input type="submit" value="追加"></td>
+    </tr>
+  </table>
+</form>

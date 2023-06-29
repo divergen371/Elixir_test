@@ -18,6 +18,7 @@ defmodule BasicWeb.Router do
     pipe_through :browser
 
     live "/", IndexLive
+    live "/qiita", QiitaLive
   end
 
   scope "/members", BasicWeb do
