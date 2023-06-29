@@ -1,37 +1,48 @@
-<%
-result = Req.get!("https://qiita.com/api/v2/items?query=elixir") |> Map.get(:body)
-datas = result
-columns = ["id", "title", "created_at", "likes_count"]
-%>
-<canvas id="likes"></canvas>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  new Chart(document.getElementById("likes"), {
-    type: 'bar',
-    data: {
-      labels: [<%=for n <- datas do%>'<%= String.slice(n["title"], 0..30) %><%= if String.length(n["title"])> 30, do: "..." %>' ,<% end %>],
-      datasets: [{
-        label: 'Qiitaいいね数',
-        data: [<%=for n <- datas do%>'<%= n["likes_count"] %>' ,<% end %>],
-        backgroundColor: [<%= for n <- datas do %>'rgba(<%= Enum.random(150..230) %>, <%= Enum.random(80..170) %>,<%= Enum.random(190..255) %>, 0.6)',<% end %>]
-      }]
-    },
-    options: {
-      indexAxis: 'y',
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.global.js"></script>
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://cdn.jsdelivr.net/npm/vue/dist/vue.esm-browser.prod.js"
     }
-  })
+  }
 </script>
-<table>
-  <tr>
-    <%=for col <- columns do %>
-      <th><%= col %></th>
-    <% end %>
-  </tr>
-  <%= for n <- datas do %>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="app">
+  <h1>Members</h1>
+  <table>
     <tr>
-      <%= for col <- columns do %>
-        <td><%= n[ col ]%></td>
-      <% end %>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>team</th>
+      <th>position</th>
     </tr>
-  <% end %>
-</table>
+    <tr v-for="n in members">
+      <td>{{n.id}}</td>
+      <td>{{n.name}}</td>
+      <td>{{n.age}}</td>
+      <td>{{n.team}}</td>
+      <td>{{n.position}}</td>
+    </tr>
+  </table>
+</div>
+<script type="module">
+  import {createApp} from "vue"
+  createApp
+  ({data()
+  {
+    return {
+      members:[],
+    }
+  },
+  mounted(){
+    this.get()
+  },
+  methods:
+  {
+    get: function() {
+      axios.get("/members").then(response => {this.members = response.data})
+    },
+  },
+  }).mount("#app")
+</script>
