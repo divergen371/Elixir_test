@@ -10,4 +10,11 @@ defmodule BasicWeb.MemberController do
       |> Enum.sort(fn current, next -> current["id"] < next["id"] end)
     )
   end
+
+  def create(conn, p) do
+    "insert into members values('#{p["name"]}', '#{p["age"]}', '#{p["team"]}', '#{p["position"]}')"
+    |> Db.query()
+
+    send_resp(conn, :created, "")
+  end
 end
