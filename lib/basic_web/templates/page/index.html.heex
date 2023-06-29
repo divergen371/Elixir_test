@@ -24,6 +24,14 @@
       <td>{{n.team}}</td>
       <td>{{n.position}}</td>
     </tr>
+    <tr>
+      <td>-</td>
+      <td><input type="text" v-model="add.name" placeholder="name"></td>
+      <td><input type="text" v-model="add.age" placeholder="age"></td>
+      <td><input type="text" v-model="add.team" placeholder="team"></td>
+      <td><input type="text" v-model="add.position" placeholder="position"></td>
+      <td><button @click="onCreate">Add</button></td>
+    </tr>
   </table>
 </div>
 <script type="module">
@@ -33,6 +41,7 @@
   {
     return {
       members:[],
+      add: {name: '', age: '', team: '', position: ''},
     }
   },
   mounted(){
@@ -41,7 +50,18 @@
   methods:
   {
     get: function() {
-      axios.get("/members").then(response => {this.members = response.data})
+      axios.get("/members").then(res => {this.members = res.data})
+    },
+    onCreate: async function(e){
+      await axios.post('/members',
+      {
+        'name': this.add.name,
+        'age': this.add.age,
+        'team': this.add.team,
+        'position': this.add.position,
+      })
+      this.add = {name: '', age: '', team: '', position: ''}
+      axios.get('/members').then(res => {this.members = res.data})
     },
   },
   }).mount("#app")
